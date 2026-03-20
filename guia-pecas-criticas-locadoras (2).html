@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Junior Pinheiro">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 Peças Que Toda Locadora Deve Ter — Médio Pesado</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink2: #16213e;
+    --purple: #7c3aed;
+    --purple-light: #a78bfa;
+    --purple-pale: #f5f3ff;
+    --teal: #0891b2;
+    --teal-pale: #ecfeff;
+    --gold: #d97706;
+    --gold-pale: #fffbeb;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --bg: #f8fafc;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--ink);
+    padding: 48px 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '10';
+    position: absolute;
+    right: -20px; top: -30px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 200px;
+    color: rgba(124,58,237,0.12);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--purple-light);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .header h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 42px;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  .header h1 span { color: var(--purple-light); }
+  .header p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    max-width: 480px;
+    line-height: 1.65;
+    margin-bottom: 28px;
+  }
+  .header-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+  .chip {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 13px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.6);
+  }
+  .chip.active { background: var(--purple); border-color: var(--purple); color: white; }
+
+  /* INTRO BAR */
+  .intro-bar {
+    background: var(--purple);
+    padding: 16px 48px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.6;
+  }
+  .intro-bar strong { color: white; font-weight: 600; }
+
+  /* BODY */
+  .body { padding: 40px 48px; background: var(--bg); }
+
+  /* SECTION TITLE */
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* PIECE CARDS */
+  .piece-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+  .piece-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: box-shadow .15s, border-color .15s;
+  }
+  .piece-card:hover {
+    border-color: var(--purple-light);
+    box-shadow: 0 4px 20px rgba(124,58,237,0.07);
+  }
+  .piece-rank {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--border);
+    line-height: 1;
+    min-width: 36px;
+    padding-top: 2px;
+    transition: color .15s;
+  }
+  .piece-card:hover .piece-rank { color: var(--purple-light); }
+  .piece-body { flex: 1; }
+  .piece-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .piece-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
+  .piece-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .ptag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 9px;
+    border-radius: 12px;
+  }
+  .ptag-crit { background: #fef2f2; color: #b91c1c; }
+  .ptag-med  { background: #fffbeb; color: #92400e; }
+  .ptag-ok   { background: #f0fdf4; color: #166534; }
+  .piece-right {
+    text-align: right;
+    min-width: 90px;
+    flex-shrink: 0;
+  }
+  .piece-estoque {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+  .piece-qty {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--purple);
+  }
+  .piece-unit { font-size: 11px; color: var(--muted); }
+  .piece-diaria {
+    margin-top: 6px;
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* TABELA RESUMO */
+  .summary-table { width: 100%; border-collapse: collapse; margin-bottom: 36px; }
+  .summary-table th {
+    background: var(--ink);
+    color: rgba(255,255,255,0.7);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    padding: 11px 14px;
+    text-align: left;
+  }
+  .summary-table td {
+    padding: 10px 14px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    background: var(--white);
+  }
+  .summary-table tr:last-child td { border-bottom: none; }
+  .priority-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .dot-red { background: #ef4444; }
+  .dot-amber { background: #f59e0b; }
+  .dot-green { background: #22c55e; }
+
+  /* DICA BOX */
+  .tip-box {
+    background: var(--purple-pale);
+    border: 1px solid #c4b5fd;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 12px;
+  }
+  .tip-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .tip-text { font-size: 13px; line-height: 1.65; color: var(--text); }
+  .tip-text strong { color: var(--purple); font-weight: 600; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--ink);
+    padding: 32px 48px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .footer-text { flex: 1; }
+  .footer-text h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .footer-text h3 span { color: var(--purple-light); }
+  .footer-text p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+  .footer-btn {
+    background: var(--purple);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 13px 24px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">Guia para gestores de frota · Locadoras</div>
+  <h1>As <span>10 peças</span> que toda<br>locadora deve ter<br>em estoque mínimo</h1>
+  <p>Locadora que não tem as peças certas na hora certa perde diária, paga frete expresso e arrisca o contrato. Este guia foi criado com base em dados reais de frotas de médio pesado.</p>
+  <div class="header-chips">
+    <span class="chip active">Médio pesado</span>
+    <span class="chip">Gestão de estoque</span>
+    <span class="chip">Manutenção preventiva</span>
+  </div>
+</div>
+
+<div class="intro-bar">
+  <strong>Regra de ouro:</strong> Em frotas de locação, o custo de uma diária perdida por falta de peça é, em média, <strong>3× maior</strong> do que o custo da própria peça em estoque. Antecipar é sempre mais barato do que emergenciar.
+</div>
+
+<div class="body">
+
+  <div class="section-label">Ranking de criticidade — top 10</div>
+
+  <div class="piece-list">
+
+    <div class="piece-card">
+      <div class="piece-rank">01</div>
+      <div class="piece-body">
+        <div class="piece-name">Filtro de óleo do motor</div>
+        <div class="piece-desc">Componente com a maior frequência de troca em frotas ativas. Negligenciar acelera o desgaste interno do motor e pode gerar falha catastrófica.</div>
+        <div class="piece-tags">
+          <span class="ptag ptag-crit">Crítico</span>
+          <span class="ptag ptag-ok">Baixo custo</span>
+        </div>
+      </div>
+      <div class="piece-right">
+        <div class="piece-estoque">Estoque mín.</div>
+        <div class="piece-qty">3–5</div>
+        <div class="piece-unit">unid. por veículo</div>
+        <div class="piece-diaria">⚡ Substitui a cada 10.000 km</div>
+      </div>
+    </div>
+
+    <div class="piece-card">
+      <div class="piece-rank">02</div>
+      <div class="piece-body">
+        <div class="piece-name">Filtro de ar do motor</div>
+        <div class="piece-desc">Em rotas com estrada de terra ou alto índice de poeira, o filtro satura antes do prazo. Ausência causa consumo excessivo e fumaça preta.</div>
+        <div class="piece-tags">
+          <span class="ptag ptag-crit">Crítico</span>
+        </div>
+      </div>
+      <div class="piece-right">
+        <div class="piece-estoque">Estoque mín.</div>
+        <div class="piece-qty">2</div>
+        <div class="piece-unit">unid. por veículo</div>
+        <div class="piece-diaria">⚡ Substitui a cada 20.000 km</div>
+      </div>
+    </div>
+
+    <div class="piece-card">
+      <div class="piece-rank">03</div>
+      <div class="piece-body">
+        <div class="piece-name">Lona de freio traseira</div>
+        <div class="piece-desc">A peça com maior índice de desgaste variável em frotas de locação — a forma de condução do locatário impacta diretamente o prazo de troca.</div>
+        <div class="piece-tags">
+          <span class="ptag ptag-crit">Crítico</span>
+          <span class="ptag ptag-med">Custo médio</span>
+        </div>
+      </div>
+      <div class="piece-right">
+        <div class="piece-estoque">Estoque mín.</div>
+        <div class="piece-qty">1 jogo</div>
+        <div class="piece-unit">por veículo/frota</div>
+        <div class="piece-diaria">⚡ Exige inspeção a cada 20.000 km</div>
+      </div>
+    </div>
+
+    <div class="piece-card">
+      <div class="piece-rank">04</div>
+      <div class="piece-body">
+        <div class="piece-name">Correia do alternador</div>
+        <div class="piece-desc">Ruptura inesperada deixa o veículo sem carga na bateria. Parada garantida no meio da rota. Custo da correia é ínfimo versus custo da parada.</div>
+        <div class="piece-tags">
+          <span class="ptag ptag-crit">Crítico</span>
+          <span class="ptag ptag-ok">Baixo custo</span>
+        </div>
+      </div>
+      <div class="piece-right">
+        <div class="piece-estoque">Estoque mín.</div>
+        <div class="piece-qty">2</div>
+        <div class="piece-unit">unid. por modelo</div>
+        <div class="piece-diaria">⚡ Inspecionar a cada 30.000 km</div>
+      </div>
+    </div>
+
+    <div class="piece-card">
+      <div class="piece-rank">05</div>
+      <div class="piece-body">
+        <div class="piece-name">Mangueira de arrefecimento</div>
+        <div class="piece-desc">Trincas e estouros de mangueira são a principal causa de superaquecimento em campo. Substituição simples mas com consequências graves se ignorada.</div>
+        <div class="piece-tags">
+          <span class="ptag ptag-crit">Crítico</span>
+        </div>
+      </div>
+      <div class="piece-right">
+        <div class="piece-estoque">Estoque mín.</div>
+        <div class="piece-qty">1 kit</div>
+        <div class="piece-unit">superior e inferior</div>
+        <div class="piece-diaria">⚡ Verificar a cada revisão</div>
+      </div>
+    </div>
+
+    <div class="piece-card">
+      <div class="piece-rank">06</div>
+      <div class="piece-body">
+        <div class="piece-name">Filtro de combustível</div>
+        <div class="piece-desc">Combustível de qualidade variável nas rotas do interior entope filtros mais rápido. Falha causa perda de potência e pode danificar a bomba injetora.</div>
+        <div class="piece-tags">
+          <span class="ptag ptag-med">Moderado</span>
+          <span class="ptag ptag-ok">Baixo custo</span>
+        </div>
+      </div>
+      <div class="piece-right">
+        <div class="piece-estoque">Estoque mín.</div>
+        <div class="piece-qty">2</div>
+        <div class="piece-unit">unid. por veículo</div>
+        <div class="piece-diaria">⚡ Trocar a cada 20.000 km</div>
+      </div>
+    </div>
+
+    <div class="piece-card">
+      <div class="piece-rank">07</div>
+      <div class="piece-body">
+        <div class="piece-name">Bateria (ou bateria reserva)</div>
+        <div class="piece-desc">Veículos de locação passam por períodos de inatividade que aceleram a descarga. Ter uma bateria reserva carregada elimina 100% das paradas por descarga.</div>
+        <div class="piece-tags">
+          <span class="ptag ptag-med">Moderado</span>
+        </div>
+      </div>
+      <div class="piece-right">
+        <div class="piece-estoque">Estoque mín.</div>
+        <div class="piece-qty">1</div>
+        <div class="piece-unit">reserva p/ frota</div>
+        <div class="piece-diaria">⚡ Trocar a cada 2–3 anos</div>
+      </div>
+    </div>
+
+    <div class="piece-card">
+      <div class="piece-rank">08</div>
+      <div class="piece-body">
+        <div class="piece-name">Bucha do braço de suspensão</div>
+        <div class="piece-desc">Desgaste rápido em frotas com uso intenso em vias irregulares. Impacta diretamente na dirigibilidade e pode ser causa de reprovação no retorno do veículo.</div>
+        <div class="piece-tags">
+          <span class="ptag ptag-med">Moderado</span>
+        </div>
+      </div>
+      <div class="piece-right">
+        <div class="piece-estoque">Estoque mín.</div>
+        <div class="piece-qty">1 kit</div>
+        <div class="piece-unit">por eixo</div>
+        <div class="piece-diaria">⚡ Inspecionar a cada 40.000 km</div>
+      </div>
+    </div>
+
+    <div class="piece-card">
+      <div class="piece-rank">09</div>
+      <div class="piece-body">
+        <div class="piece-name">Lampadas e fusíveis essenciais</div>
+        <div class="piece-desc">Itens de baixíssimo custo que travam o veículo por reprovação na vistoria. Manter um kit completo elimina paradas desnecessárias na devolução.</div>
+        <div class="piece-tags">
+          <span class="ptag ptag-ok">Baixo custo</span>
+          <span class="ptag ptag-ok">Fácil substituição</span>
+        </div>
+      </div>
+      <div class="piece-right">
+        <div class="piece-estoque">Estoque mín.</div>
+        <div class="piece-qty">1 kit</div>
+        <div class="piece-unit">completo</div>
+        <div class="piece-diaria">⚡ Verificar antes de cada locação</div>
+      </div>
+    </div>
+
+    <div class="piece-card">
+      <div class="piece-rank">10</div>
+      <div class="piece-body">
+        <div class="piece-name">Terminal e cabo de bateria</div>
+        <div class="piece-desc">Corrosão e mau contato são responsáveis por uma parcela significativa de falhas elétricas em campo. Substituição rápida e de baixo custo.</div>
+        <div class="piece-tags">
+          <span class="ptag ptag-ok">Baixo custo</span>
+        </div>
+      </div>
+      <div class="piece-right">
+        <div class="piece-estoque">Estoque mín.</div>
+        <div class="piece-qty">2</div>
+        <div class="piece-unit">unid. por frota</div>
+        <div class="piece-diaria">⚡ Inspecionar mensalmente</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DICA -->
+  <div class="tip-box">
+    <div class="tip-icon">💡</div>
+    <div class="tip-text">
+      <strong>Como calcular seu estoque mínimo:</strong> Multiplique a quantidade recomendada pelo número de veículos da frota. Para frotas acima de 10 veículos, considere centralizar o estoque e criar um ponto de retirada rápida. O objetivo é que nenhum veículo fique mais de 4 horas parado por falta de peça disponível.
+    </div>
+  </div>
+
+  <!-- TABELA RESUMO -->
+  <div class="section-label">Resumo de criticidade e frequência</div>
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Peça</th>
+        <th>Criticidade</th>
+        <th>Frequência de uso</th>
+        <th>Impacto na diária</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Filtro de óleo</strong></td><td><span class="priority-dot dot-red"></span>Alta</td><td>A cada 10.000 km</td><td>Indireto (longo prazo)</td></tr>
+      <tr><td><strong>Filtro de ar</strong></td><td><span class="priority-dot dot-red"></span>Alta</td><td>A cada 20.000 km</td><td>Indireto (desempenho)</td></tr>
+      <tr><td><strong>Lona de freio</strong></td><td><span class="priority-dot dot-red"></span>Alta</td><td>Variável por uso</td><td>Direto (segurança)</td></tr>
+      <tr><td><strong>Correia alternador</strong></td><td><span class="priority-dot dot-red"></span>Alta</td><td>A cada 60.000 km</td><td>Direto (parada total)</td></tr>
+      <tr><td><strong>Mangueira arrefec.</strong></td><td><span class="priority-dot dot-red"></span>Alta</td><td>A cada revisão</td><td>Direto (superaquec.)</td></tr>
+      <tr><td><strong>Filtro combustível</strong></td><td><span class="priority-dot dot-amber"></span>Média</td><td>A cada 20.000 km</td><td>Direto (perda de pot.)</td></tr>
+      <tr><td><strong>Bateria</strong></td><td><span class="priority-dot dot-amber"></span>Média</td><td>2–3 anos</td><td>Direto (parada total)</td></tr>
+      <tr><td><strong>Bucha suspensão</strong></td><td><span class="priority-dot dot-amber"></span>Média</td><td>A cada 40.000 km</td><td>Indireto (desgaste)</td></tr>
+      <tr><td><strong>Lâmpadas/fusíveis</strong></td><td><span class="priority-dot dot-green" style="background:#22c55e"></span>Baixa</td><td>Eventual</td><td>Direto (vistoria)</td></tr>
+      <tr><td><strong>Terminal bateria</strong></td><td><span class="priority-dot dot-green" style="background:#22c55e"></span>Baixa</td><td>Eventual</td><td>Indireto (elétrico)</td></tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div style="background:#f8fafc;border-top:3px solid #E8530A;padding:32px 48px;display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+  <img src="https://gabrielsimidamore.github.io/Iscas-digitais-junior-pinheiro/junior-pinheiro.jpg" alt="Junior Pinheiro" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid #E8530A;flex-shrink:0" onerror="this.style.display='none'">
+  <div>
+    <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#E8530A;margin-bottom:4px">Sobre o autor</div>
+    <div style="font-size:17px;font-weight:700;color:#0f0f0f;margin-bottom:4px">Junior Pinheiro</div>
+    <div style="font-size:13px;color:#555;line-height:1.6;max-width:480px">Especialista em autopeças médio pesado com <strong>+20 anos</strong> ajudando frotas a reduzir custos. Passou por estoque, vendas, compras e hoje atua como gerente de projetos.</div>
+  </div>
+</div>
+<div class="footer">
+  <div class="footer-text">
+    <h3>Monte seu estoque <span>agora</span></h3>
+    <p>Nossa equipe especializada em médio pesado pode montar o kit de estoque mínimo personalizado para o tamanho da sua frota.</p>
+  </div>
+  <a href="https://wa.me/5511981661862?text=Ol%C3%A1%2C+vi+o+guia+de+pe%C3%A7as+cr%C3%ADticas+e+quero+saber+mais" target="_blank" style="text-decoration:none"><button class="footer-btn">💬 Falar com Junior Pinheiro</button></a>
+</div>
+
+<div style="text-align:center;padding:16px 24px;font-size:12px;opacity:0.5;font-family:sans-serif;border-top:1px solid rgba(128,128,128,0.15);margin-top:0">Desenvolvido por <strong>Junior Pinheiro</strong> · Especialista em Autopeças Médio Pesado</div>
+</body>
+</html>
