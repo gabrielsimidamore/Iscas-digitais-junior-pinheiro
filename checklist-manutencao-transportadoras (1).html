@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Junior Pinheiro">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist Manutenção Preventiva — Frota Médio Pesado</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0f0f0f;
+    --orange: #E8530A;
+    --orange-light: #FF6B2B;
+    --orange-pale: #FFF1EB;
+    --gray-dark: #2a2a2a;
+    --gray-mid: #555;
+    --gray-light: #f4f4f2;
+    --white: #ffffff;
+    --border: #e0ddd8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  /* COVER */
+  .cover {
+    background: var(--black);
+    color: var(--white);
+    padding: 56px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 40px solid rgba(232,83,10,0.18);
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 60px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 25px solid rgba(232,83,10,0.10);
+  }
+  .cover-tag {
+    display: inline-block;
+    background: var(--orange);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+  .cover h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 52px;
+    line-height: 1.0;
+    text-transform: uppercase;
+    letter-spacing: -.01em;
+    margin-bottom: 16px;
+  }
+  .cover h1 span { color: var(--orange-light); }
+  .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    max-width: 420px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+  .cover-stats {
+    display: flex;
+    gap: 32px;
+  }
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    color: var(--orange-light);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-top: 2px;
+  }
+
+  /* INTRO STRIP */
+  .intro-strip {
+    background: var(--orange);
+    padding: 18px 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .intro-strip p {
+    font-size: 13px;
+    color: var(--white);
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .intro-strip p strong { font-weight: 700; }
+
+  /* BODY */
+  .body { padding: 40px 48px; }
+
+  /* SECTION */
+  .section { margin-bottom: 36px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--black);
+  }
+  .section-num {
+    background: var(--orange);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .section-interval {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--orange);
+    background: var(--orange-pale);
+    padding: 3px 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  /* CHECKLIST ITEMS */
+  .check-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--gray-light);
+    border-radius: 4px;
+    border-left: 3px solid transparent;
+    transition: border-color .15s;
+  }
+  .check-item:hover { border-left-color: var(--orange); }
+  .check-box {
+    width: 18px; height: 18px;
+    border: 2px solid var(--border);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    cursor: pointer;
+    position: relative;
+    background: var(--white);
+  }
+  .check-box.checked {
+    background: var(--orange);
+    border-color: var(--orange);
+  }
+  .check-box.checked::after {
+    content: '';
+    position: absolute;
+    left: 3px; top: 0px;
+    width: 8px; height: 12px;
+    border: 2.5px solid white;
+    border-left: none; border-top: none;
+    transform: rotate(40deg);
+  }
+  .check-text { font-size: 13px; line-height: 1.45; color: var(--gray-dark); }
+  .check-text strong { font-weight: 600; color: var(--black); display: block; font-size: 13px; }
+  .check-text span { font-size: 11px; color: var(--gray-mid); }
+
+  /* ALERT BOX */
+  .alert-box {
+    background: #fff8f5;
+    border: 1.5px solid var(--orange);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .alert-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .alert-text { font-size: 13px; line-height: 1.6; color: var(--gray-dark); }
+  .alert-text strong { color: var(--orange); font-weight: 700; }
+
+  /* TABELA KM */
+  .km-table { width: 100%; border-collapse: collapse; margin-bottom: 28px; }
+  .km-table th {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .km-table td {
+    padding: 9px 14px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    color: var(--gray-dark);
+  }
+  .km-table tr:nth-child(even) td { background: var(--gray-light); }
+  .km-table tr:hover td { background: var(--orange-pale); }
+  .km-badge {
+    display: inline-block;
+    background: var(--orange);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+  .km-badge.alt { background: var(--gray-dark); }
+
+  /* PROGRESS BAR */
+  .progress-section {
+    background: var(--gray-light);
+    border-radius: 6px;
+    padding: 18px 20px;
+    margin-bottom: 28px;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .progress-bar {
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--orange);
+    border-radius: 4px;
+    width: 0%;
+    transition: width .4s ease;
+  }
+
+  /* CTA FOOTER */
+  .cta-footer {
+    background: var(--black);
+    color: var(--white);
+    padding: 36px 48px;
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+  .cta-footer-text h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .cta-footer-text h3 span { color: var(--orange-light); }
+  .cta-footer-text p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+    max-width: 340px;
+  }
+  .cta-btn {
+    flex-shrink: 0;
+    background: var(--orange);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 14px 28px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+    .check-item { border-left-color: transparent !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div class="cover">
+  <div class="cover-tag">Ferramenta gratuita · Gestão de frota</div>
+  <h1>Checklist de<br><span>manutenção</span><br>preventiva</h1>
+  <p class="cover-sub">20 pontos de inspeção obrigatórios para frotas médio pesado. Evite paradas inesperadas e reduza custo com manutenção corretiva.</p>
+  <div class="cover-stats">
+    <div>
+      <div class="stat-num">20</div>
+      <div class="stat-label">pontos de inspeção</div>
+    </div>
+    <div>
+      <div class="stat-num">4</div>
+      <div class="stat-label">categorias críticas</div>
+    </div>
+    <div>
+      <div class="stat-num">-30%</div>
+      <div class="stat-label">custo corretivo médio</div>
+    </div>
+  </div>
+</div>
+
+<!-- STRIP -->
+<div class="intro-strip">
+  <span style="font-size:22px">⚠️</span>
+  <p><strong>Por que isso importa:</strong> Uma parada inesperada de caminhão custa em média R$ 1.200 a R$ 4.500 por dia somando frete perdido, mão de obra emergencial e peças com frete expresso. Este checklist foi desenvolvido para eliminar esse custo.</p>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- BARRA DE PROGRESSO -->
+  <div class="progress-section">
+    <div class="progress-label">
+      <span>Progresso da inspeção</span>
+      <span id="progress-text">0 de 20 itens verificados</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+
+  <!-- SEÇÃO 1: MOTOR -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">Motor e sistema de arrefecimento</div>
+      <div class="section-interval">A cada 10.000 km</div>
+    </div>
+    <div class="check-grid">
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Nível e qualidade do óleo do motor</strong><span>Verificar cor, viscosidade e nível no visor. Substituir se escuro ou com partículas.</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Nível do líquido de arrefecimento</strong><span>Verificar reservatório e radiador frio. Inspecionar mangueiras quanto a rachaduras.</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Correia dentada e correia do alternador</strong><span>Verificar tensão, desgaste e presença de trincas. Risco alto de quebra se negligenciada.</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Filtro de ar do motor</strong><span>Verificar saturação e elemento filtrante. Substituir conforme indicador de restrição.</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Filtro de combustível (pré e principal)</strong><span>Drenar água acumulada no filtro sedimentador. Substituir no prazo do fabricante.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 2: FREIOS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Sistema de freios e suspensão</div>
+      <div class="section-interval">A cada 20.000 km</div>
+    </div>
+    <div class="check-grid">
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Espessura das lonas e discos de freio</strong><span>Medir espessura residual. Substituir quando atingir limite mínimo do fabricante.</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Regulagem do freio a tambor</strong><span>Verificar folga e ajuste automático. Testar pedal com veículo parado e em movimento.</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Mangueiras e conexões pneumáticas</strong><span>Inspecionar vazamentos no sistema de ar. Verificar pressão do reservatório em marcha lenta.</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Amortecedores e buchas de suspensão</strong><span>Verificar vazamento de óleo nos amortecedores. Checar folga e estado das buchas.</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Rolamentos de roda</strong><span>Verificar folga axial e ruídos. Rebuscar e lubrificar nos prazos do manual.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALERTA -->
+  <div class="alert-box">
+    <div class="alert-icon">🔴</div>
+    <div class="alert-text"><strong>Atenção — Peças mais substituídas em frota pesada:</strong> Lonas de freio, filtros (ar, óleo, combustível), correias e mangueiras de arrefecimento respondem por <strong>68% das paradas inesperadas</strong> em frotas médio pesado. Priorize estoque mínimo desses itens.</div>
+  </div>
+
+  <!-- SEÇÃO 3: PNEUS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">Pneus e rodas</div>
+      <div class="section-interval">Semanal</div>
+    </div>
+    <div class="check-grid">
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Pressão de todos os pneus (frio)</strong><span>Calibrar conforme tabela do fabricante. Incluir estepe. Pressão incorreta eleva consumo em até 8%.</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Profundidade do sulco (mínimo 1,6 mm)</strong><span>Usar medidor de sulco. Verificar desgaste irregular — pode indicar problema de alinhamento.</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Torque dos parafusos de roda</strong><span>Verificar com torquímetro conforme especificação. Risco de perda de roda em viagem.</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Alinhamento e balanceamento</strong><span>Verificar a cada 20.000 km ou ao notar desgaste irregular. Previne desgaste prematuro.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 4: ELÉTRICA -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Sistema elétrico e iluminação</div>
+      <div class="section-interval">Mensal</div>
+    </div>
+    <div class="check-grid">
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Bateria — carga e terminais</strong><span>Verificar tensão (mínimo 12,4V em repouso). Limpar terminais com sulfatação.</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Alternador — tensão de carga</strong><span>Verificar entre 13,8V e 14,5V com motor em marcha. Falha causa descarga de bateria em viagem.</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Iluminação completa (faróis, setas, freio)</strong><span>Testar todas as lanternas, faróis e luzes de freio. Exigência legal e segurança obrigatória.</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="toggleCheck(this)"></div>
+        <div class="check-text"><strong>Limpadores de para-brisa e fluido</strong><span>Verificar estado da borracha e pressão dos jatos. Visibilidade crítica em chuva.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABELA DE INTERVALOS -->
+  <div class="section-header" style="margin-bottom:14px; padding-bottom:10px; border-bottom:2px solid var(--black);">
+    <div class="section-num" style="background:var(--gray-dark)">★</div>
+    <div class="section-title">Tabela de intervalos — peças críticas</div>
+  </div>
+
+  <table class="km-table">
+    <thead>
+      <tr>
+        <th>Componente</th>
+        <th>Intervalo de troca</th>
+        <th>Criticidade</th>
+        <th>Custo estimado parada</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Óleo do motor + filtro</strong></td>
+        <td>A cada 10.000 km ou 6 meses</td>
+        <td><span class="km-badge">Alta</span></td>
+        <td>R$ 3.000 – R$ 18.000 (motor)</td>
+      </tr>
+      <tr>
+        <td><strong>Filtro de ar</strong></td>
+        <td>A cada 20.000 km</td>
+        <td><span class="km-badge">Alta</span></td>
+        <td>R$ 800 – R$ 2.500</td>
+      </tr>
+      <tr>
+        <td><strong>Correia dentada</strong></td>
+        <td>A cada 60.000 km</td>
+        <td><span class="km-badge">Alta</span></td>
+        <td>R$ 4.500 – R$ 22.000</td>
+      </tr>
+      <tr>
+        <td><strong>Lonas de freio</strong></td>
+        <td>A cada 40.000–80.000 km</td>
+        <td><span class="km-badge">Alta</span></td>
+        <td>R$ 1.500 – R$ 6.000</td>
+      </tr>
+      <tr>
+        <td><strong>Fluido de arrefecimento</strong></td>
+        <td>A cada 2 anos ou 60.000 km</td>
+        <td><span class="km-badge alt">Média</span></td>
+        <td>R$ 2.000 – R$ 8.000</td>
+      </tr>
+      <tr>
+        <td><strong>Pneus</strong></td>
+        <td>A cada 80.000–120.000 km</td>
+        <td><span class="km-badge alt">Média</span></td>
+        <td>R$ 1.200 – R$ 4.000/dia parado</td>
+      </tr>
+      <tr>
+        <td><strong>Amortecedores</strong></td>
+        <td>A cada 60.000–80.000 km</td>
+        <td><span class="km-badge alt">Média</span></td>
+        <td>R$ 900 – R$ 3.500</td>
+      </tr>
+      <tr>
+        <td><strong>Bateria</strong></td>
+        <td>A cada 2–3 anos</td>
+        <td><span class="km-badge alt">Média</span></td>
+        <td>R$ 600 – R$ 2.000</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- FOOTER CTA -->
+<div style="background:#f8fafc;border-top:3px solid #E8530A;padding:32px 48px;display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+  <img src="https://gabrielsimidamore.github.io/Iscas-digitais-junior-pinheiro/junior-pinheiro.jpg" alt="Junior Pinheiro" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid #E8530A;flex-shrink:0" onerror="this.style.display='none'">
+  <div>
+    <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#E8530A;margin-bottom:4px">Sobre o autor</div>
+    <div style="font-size:17px;font-weight:700;color:#0f0f0f;margin-bottom:4px">Junior Pinheiro</div>
+    <div style="font-size:13px;color:#555;line-height:1.6;max-width:480px">Especialista em autopeças médio pesado com <strong>+20 anos</strong> ajudando frotas a reduzir custos. Passou por estoque, vendas, compras e hoje atua como gerente de projetos.</div>
+  </div>
+</div>
+<div class="cta-footer">
+  <div class="cta-footer-text">
+    <h3>Precisa de <span>peças agora?</span></h3>
+    <p>Consulte disponibilidade e preço das peças críticas para sua frota. Atendimento especializado em médio pesado com entrega rápida.</p>
+  </div>
+  <a href="https://wa.me/5511981661862?text=Ol%C3%A1%2C+vi+o+checklist+de+manuten%C3%A7%C3%A3o+preventiva+e+quero+saber+mais" target="_blank" style="text-decoration:none"><button class="cta-btn">💬 Falar com Junior Pinheiro</button></a>
+</div>
+
+
+<script>
+  let checked = 0;
+  const total = 20;
+
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+    checked = document.querySelectorAll('.check-box.checked').length;
+    const pct = Math.round((checked / total) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = checked + ' de ' + total + ' itens verificados';
+  }
+</script>
+<div style="text-align:center;padding:16px 24px;font-size:12px;opacity:0.5;font-family:sans-serif;border-top:1px solid rgba(128,128,128,0.15);margin-top:0">Desenvolvido por <strong>Junior Pinheiro</strong> · Especialista em Autopeças Médio Pesado</div>
+</body>
+</html>

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Junior Pinheiro">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glossário Técnico de Peças — Laudos de Sinistro Médio Pesado</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f2044;
+    --navy2: #162a57;
+    --blue: #1d4ed8;
+    --blue-light: #3b82f6;
+    --blue-pale: #eff6ff;
+    --gold: #b45309;
+    --gold-light: #d97706;
+    --gold-pale: #fef9ee;
+    --text: #1e2d40;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --bg: #f8faff;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--navy);
+    padding: 52px 52px 44px;
+    position: relative;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold-light), var(--blue-light));
+  }
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .header h1 em {
+    color: #93c5fd;
+    font-style: normal;
+  }
+  .header-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+    max-width: 500px;
+    margin-bottom: 28px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 28px;
+  }
+  .meta-item { }
+  .meta-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #93c5fd;
+    line-height: 1;
+  }
+  .meta-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-top: 2px;
+  }
+
+  /* BODY */
+  .body { padding: 40px 52px; background: var(--bg); }
+
+  /* SEARCH */
+  .search-wrap { position: relative; margin-bottom: 28px; }
+  .search-wrap input {
+    width: 100%;
+    padding: 13px 16px 13px 44px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .search-wrap input:focus {
+    border-color: var(--blue-light);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+  }
+  .search-wrap input::placeholder { color: var(--muted); }
+  .search-icon {
+    position: absolute;
+    left: 14px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 16px;
+    pointer-events: none;
+  }
+  .result-count {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+    margin-bottom: 20px;
+  }
+  .result-count span { color: var(--blue); font-weight: 600; }
+
+  /* CATEGORY */
+  .cat-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    margin-top: 32px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--navy);
+  }
+  .cat-header:first-of-type { margin-top: 0; }
+  .cat-icon {
+    width: 28px; height: 28px;
+    background: var(--navy);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .cat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .cat-count {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2px 10px;
+  }
+
+  /* TERM CARDS */
+  .term-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
+  @media (max-width: 580px) { .term-grid { grid-template-columns: 1fr; } }
+
+  .term-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .term-card:hover { border-color: var(--blue-light); box-shadow: 0 2px 12px rgba(29,78,216,0.07); }
+  .term-card.original-only {
+    border-left: 3px solid var(--gold-light);
+  }
+  .term-card.hidden { display: none; }
+  .term-name {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--navy);
+    margin-bottom: 5px;
+  }
+  .term-def { font-size: 12px; color: var(--muted); line-height: 1.55; margin-bottom: 8px; }
+  .term-footer { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .term-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+  .badge-original { background: var(--gold-pale); color: var(--gold); border: 1px solid #fcd34d; }
+  .badge-parallel { background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; }
+  .badge-remanuf { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
+  .badge-info { background: var(--blue-pale); color: var(--blue); border: 1px solid #bfdbfe; }
+  .term-sinistro {
+    font-size: 10px;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  /* ALERTA ORIGINAL x PARALELA */
+  .compare-box {
+    background: var(--white);
+    border: 1.5px solid var(--gold-light);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+    margin-top: 8px;
+  }
+  .compare-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 500px) { .compare-grid { grid-template-columns: 1fr; } }
+  .compare-col h4 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 8px;
+  }
+  .compare-col h4.orig { color: var(--gold); }
+  .compare-col h4.paral { color: #b91c1c; }
+  .compare-col ul { list-style: none; }
+  .compare-col ul li {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 3px;
+  }
+  .compare-col ul li::before { content: '→'; position: absolute; left: 0; color: var(--border); }
+
+  /* CHECKLIST DE VISTORIA */
+  .vistoria-box {
+    background: var(--blue-pale);
+    border: 1px solid #bfdbfe;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 28px;
+  }
+  .vistoria-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .v-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media (max-width: 500px) { .v-grid { grid-template-columns: 1fr; } }
+  .v-item {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    background: var(--white);
+    border-radius: 6px;
+    padding: 9px 11px;
+    font-size: 12px;
+    color: var(--text);
+  }
+  .v-check {
+    width: 16px; height: 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    cursor: pointer;
+    background: var(--white);
+    position: relative;
+  }
+  .v-check.done { background: var(--blue); border-color: var(--blue); }
+  .v-check.done::after {
+    content: '';
+    position: absolute;
+    left: 2px; top: -1px;
+    width: 8px; height: 11px;
+    border: 2px solid white;
+    border-left: none; border-top: none;
+    transform: rotate(40deg);
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--navy);
+    padding: 36px 52px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .footer-text { flex: 1; }
+  .footer-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .footer-text p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+  .footer-btn {
+    background: #93c5fd;
+    color: var(--navy);
+    border: none;
+    border-radius: 8px;
+    padding: 13px 24px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .no-results { font-size: 14px; color: var(--muted); padding: 24px; text-align: center; display: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">📋 Ferramenta para peritos · Seguradoras</div>
+  <h1>Glossário técnico de peças<br><em>Laudos de sinistro</em><br>médio pesado</h1>
+  <p class="header-sub">Identifique componentes, entenda a diferença entre peças originais e paralelas, e agilize a peritagem com terminologia técnica correta.</p>
+  <div class="header-meta">
+    <div class="meta-item">
+      <div class="meta-num">40+</div>
+      <div class="meta-label">termos técnicos</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-num">5</div>
+      <div class="meta-label">sistemas do veículo</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-num">3</div>
+      <div class="meta-label">tipos de peça</div>
+    </div>
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- BUSCA -->
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search" placeholder="Buscar termo técnico... ex: amortecedor, lona, alternador" oninput="buscar()">
+  </div>
+  <div class="result-count" id="count-text">Exibindo <span id="count-num">40</span> termos</div>
+
+  <!-- ORIGINAL vs PARALELA -->
+  <div class="compare-box">
+    <div class="compare-title">⚠️ Referência rápida — original vs paralela vs remanufaturada</div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <h4 class="orig">Peça original (OEM)</h4>
+        <ul>
+          <li>Fabricada ou homologada pelo montador</li>
+          <li>Código de rastreabilidade obrigatório</li>
+          <li>Garantia do fabricante inclusa</li>
+          <li>Preço mais alto — aceito em sinistro integral</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <h4 class="paral">Peça paralela / genérica</h4>
+        <ul>
+          <li>Fabricação independente, sem certificação OEM</li>
+          <li>Pode não constar no catálogo do veículo</li>
+          <li>Menor custo — requer avaliação no laudo</li>
+          <li>Verificar se aceita na apólice específica</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIA: MOTOR -->
+  <div class="cat-header">
+    <div class="cat-icon">🔩</div>
+    <div class="cat-title">Motor e sistema de combustível</div>
+    <div class="cat-count">8 termos</div>
+  </div>
+  <div class="term-grid">
+    <div class="term-card">
+      <div class="term-name">Bloco do motor</div>
+      <div class="term-def">Estrutura principal metálica que abriga os cilindros, pistões e virabrequim. Em sinistros graves, pode exigir substituição total.</div>
+      <div class="term-footer"><span class="term-badge badge-info">estrutural</span><span class="term-sinistro">Alto valor de reposição</span></div>
+    </div>
+    <div class="term-card original-only">
+      <div class="term-name">Cabeçote</div>
+      <div class="term-def">Tampa superior do motor que sela os cilindros. Trinca ou empenamento são comuns em superaquecimentos — indica sinistro secundário.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original recomendado</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Bomba injetora</div>
+      <div class="term-def">Componente responsável pelo bombeamento de combustível de alta pressão para os injetores. Falha geralmente por contaminação ou desgaste.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original</span><span class="term-badge badge-remanuf">remanuf. aceita</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Injetor de combustível</div>
+      <div class="term-def">Bico que atomiza combustível na câmara. Em sinistros com incêndio ou inundação, exige análise individual por cilindro.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Cárter</div>
+      <div class="term-def">Reservatório inferior de óleo do motor. Impactos na parte baixa do veículo frequentemente causam trinca ou rompimento.</div>
+      <div class="term-footer"><span class="term-badge badge-parallel">paralela aceita</span><span class="term-sinistro">Verificar contaminação</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Turbina (turbocompressor)</div>
+      <div class="term-def">Componente que comprime o ar admitido para aumentar potência. Dano por falta de óleo ou corpo estranho — comum em sinistros de capotamento.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original recomendado</span><span class="term-badge badge-remanuf">remanuf. aceita</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Filtro de combustível (sedimentador)</div>
+      <div class="term-def">Separa água e impurezas do diesel. Presença excessiva de água pode indicar sabotagem ou armazenamento indevido — relevante em fraudes.</div>
+      <div class="term-footer"><span class="term-badge badge-parallel">paralela aceita</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Virabrequim</div>
+      <div class="term-def">Eixo principal do motor que converte movimento dos pistões em rotação. Dano quase sempre indica falha catastrófica do motor.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original</span><span class="term-sinistro">Perda total do motor</span></div>
+    </div>
+  </div>
+
+  <!-- CATEGORIA: FREIOS -->
+  <div class="cat-header">
+    <div class="cat-icon">🛑</div>
+    <div class="cat-title">Sistema de freios</div>
+    <div class="cat-count">7 termos</div>
+  </div>
+  <div class="term-grid">
+    <div class="term-card">
+      <div class="term-name">Lona de freio</div>
+      <div class="term-def">Material de atrito fixado às sapatas que pressiona o tambor para desacelerar. Desgaste excessivo pode ser causa ou agravante em acidentes.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original recomendado</span><span class="term-badge badge-parallel">paralela aceita</span></div>
+    </div>
+    <div class="term-card original-only">
+      <div class="term-name">Disco de freio</div>
+      <div class="term-def">Componente metálico rotativo pressionado pelas pastilhas. Trincas radiais ou empenamento indicam sobreaquecimento — pode ser causa de acidente.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original recomendado</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Tambor de freio</div>
+      <div class="term-def">Equivalente ao disco em sistemas a tambor. Marcas internas de metal ou arranhados profundos indicam lona desgastada até a sapata.</div>
+      <div class="term-footer"><span class="term-badge badge-parallel">paralela aceita</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Câmara de freio (canhão de freio)</div>
+      <div class="term-def">Atuador pneumático que converte pressão de ar em força de frenagem. Falha provoca perda parcial ou total de frenagem.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original</span><span class="term-sinistro">Crítico para peritagem</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Relé de freio (válvula relé)</div>
+      <div class="term-def">Controla o fluxo de ar comprimido para as câmaras de freio do eixo traseiro. Falha causa resposta lenta ou ausente no pedal.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original recomendado</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Freio motor (retarder)</div>
+      <div class="term-def">Sistema auxiliar que usa a resistência do motor para desacelerar sem acionar o freio de serviço. Falha aumenta desgaste das lonas.</div>
+      <div class="term-footer"><span class="term-badge badge-info">sistema auxiliar</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">ABS (sistema antibloqueio)</div>
+      <div class="term-def">Módulo eletrônico e sensores que evitam travamento das rodas. Dano ao módulo ou sensor pode indicar impacto — verificar no laudo eletrônico.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original obrigatório</span><span class="term-sinistro">Requer leitura de DTC</span></div>
+    </div>
+  </div>
+
+  <!-- CATEGORIA: SUSPENSÃO E DIREÇÃO -->
+  <div class="cat-header">
+    <div class="cat-icon">🔧</div>
+    <div class="cat-title">Suspensão e direção</div>
+    <div class="cat-count">8 termos</div>
+  </div>
+  <div class="term-grid">
+    <div class="term-card">
+      <div class="term-name">Mola de suspensão (feixe de molas)</div>
+      <div class="term-def">Conjunto de lâminas metálicas que absorve impactos. Fratura ou deformação permanente indica colisão ou sobrecarga — relevante em sinistros.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original recomendado</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Amortecedor</div>
+      <div class="term-def">Controla a oscilação das molas. Vazamento de óleo ou curso irregular indica desgaste prematuro ou dano por impacto.</div>
+      <div class="term-footer"><span class="term-badge badge-parallel">paralela aceita</span><span class="term-badge badge-remanuf">remanuf. aceita</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Bucha de suspensão</div>
+      <div class="term-def">Elemento de borracha ou poliuretano que isola vibrações entre braços e chassi. Desgaste causa folgas e ruídos — comum em frotas de uso intenso.</div>
+      <div class="term-footer"><span class="term-badge badge-parallel">paralela aceita</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Pino mestre (king pin)</div>
+      <div class="term-def">Eixo de articulação do eixo dianteiro que permite a esterçagem. Folga excessiva compromete direção e causa desgaste irregular de pneus.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original recomendado</span><span class="term-sinistro">Inspecionar em capotamentos</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Caixa de direção hidráulica</div>
+      <div class="term-def">Mecanismo que converte rotação do volante em movimento de esterçagem com auxílio de bomba hidráulica. Vazamento ou folga são sinais de dano.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Rolamento de roda</div>
+      <div class="term-def">Permite rotação do cubo com mínimo atrito. Dano por sobrecarga, impacto ou falta de lubrificação — pode causar bloqueio de roda.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original recomendado</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Cubo de roda</div>
+      <div class="term-def">Conjunto central que suporta o rolamento e prende o pneu. Trinca ou deformação em colisões laterais exige substituição obrigatória.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original</span><span class="term-sinistro">Crítico em colisão lateral</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Barra de direção (tirante)</div>
+      <div class="term-def">Liga a caixa de direção às rodas. Deformação após impacto frontal compromete alinhamento — deve constar em qualquer sinistro com colisão frontal.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original recomendado</span><span class="term-sinistro">Documentar deformação</span></div>
+    </div>
+  </div>
+
+  <!-- CATEGORIA: ELÉTRICA -->
+  <div class="cat-header">
+    <div class="cat-icon">⚡</div>
+    <div class="cat-title">Sistema elétrico</div>
+    <div class="cat-count">6 termos</div>
+  </div>
+  <div class="term-grid">
+    <div class="term-card">
+      <div class="term-name">Alternador</div>
+      <div class="term-def">Gera energia elétrica enquanto o motor está em funcionamento. Dano por impacto ou curto — verificar tensão de saída na peritagem.</div>
+      <div class="term-footer"><span class="term-badge badge-remanuf">remanuf. aceita</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Motor de arranque (starter)</div>
+      <div class="term-def">Aciona o motor no momento da partida. Dano por curto ou impacto — sinistros com alagamento frequentemente danificam este componente.</div>
+      <div class="term-footer"><span class="term-badge badge-remanuf">remanuf. aceita</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Módulo de injeção (ECM/ECU)</div>
+      <div class="term-def">Central eletrônica que gerencia injeção de combustível. Dano por curto, impacto ou umidade — exige leitura de DTC para diagnóstico completo.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original obrigatório</span><span class="term-sinistro">Requer programação</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Sensor de temperatura do motor</div>
+      <div class="term-def">Monitora temperatura do arrefecimento e informa a ECU. Falha pode mascarar superaquecimento — relevante em sinistros por incêndio.</div>
+      <div class="term-footer"><span class="term-badge badge-parallel">paralela aceita</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Painel de instrumentos (cluster)</div>
+      <div class="term-def">Conjunto de mostradores e indicadores na cabine. Danos por impacto frontal são comuns — pode armazenar dados do sinistro em alguns modelos.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original recomendado</span><span class="term-sinistro">Verificar registros de falha</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Chicote elétrico (mazo)</div>
+      <div class="term-def">Conjunto de cabos e conectores que interliga todos os sistemas elétricos. Dano em incêndios ou colisões — custo de substituição pode ser alto.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original recomendado</span></div>
+    </div>
+  </div>
+
+  <!-- CATEGORIA: TRANSMISSÃO -->
+  <div class="cat-header">
+    <div class="cat-icon">⚙️</div>
+    <div class="cat-title">Transmissão e eixos</div>
+    <div class="cat-count">6 termos</div>
+  </div>
+  <div class="term-grid">
+    <div class="term-card original-only">
+      <div class="term-name">Caixa de câmbio</div>
+      <div class="term-def">Transmite potência do motor às rodas com relações de marcha. Dano interno raramente é visível externamente — exige desmontagem para laudo.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original</span><span class="term-badge badge-remanuf">remanuf. aceita</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Diferencial</div>
+      <div class="term-def">Permite que rodas do mesmo eixo girem em velocidades diferentes em curvas. Dano por impacto lateral ou sobrecarga — verificar em sinistros de capotamento.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original recomendado</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Disco de embreagem</div>
+      <div class="term-def">Placa de atrito que conecta e desconecta motor e caixa. Desgaste acelerado em frotas de curta distância — verificar histórico de manutenção.</div>
+      <div class="term-footer"><span class="term-badge badge-parallel">paralela aceita</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Semi-eixo (semi-árbol)</div>
+      <div class="term-def">Transmite torque do diferencial às rodas traseiras. Fratura em impactos laterais ou sobrecarga — parada imediata do veículo.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original recomendado</span><span class="term-sinistro">Documentar ponto de fratura</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Junta homocinética (CV joint)</div>
+      <div class="term-def">Permite transmissão de torque em ângulos variados. Presença de graxa ao redor da roda indica coifa rompida — componente comprometido.</div>
+      <div class="term-footer"><span class="term-badge badge-original">original recomendado</span></div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">Cruzeta do cardan</div>
+      <div class="term-def">Articula o eixo cardan para transmitir torque em ângulos variáveis. Vibração excessiva no piso da cabine indica desgaste ou dano.</div>
+      <div class="term-footer"><span class="term-badge badge-parallel">paralela aceita</span></div>
+    </div>
+  </div>
+
+  <div class="no-results" id="no-results">Nenhum termo encontrado. Tente outra palavra.</div>
+
+  <!-- CHECKLIST DE VISTORIA -->
+  <div style="margin-top:32px">
+    <div class="vistoria-box">
+      <div class="vistoria-title">📋 Checklist rápido de vistoria — sinistro médio pesado</div>
+      <div class="v-grid" id="vistoria-grid">
+        <div class="v-item"><div class="v-check" onclick="this.classList.toggle('done')"></div>Fotografar todos os sistemas afetados</div>
+        <div class="v-item"><div class="v-check" onclick="this.classList.toggle('done')"></div>Identificar peças originais vs paralelas instaladas</div>
+        <div class="v-item"><div class="v-check" onclick="this.classList.toggle('done')"></div>Realizar leitura de DTC (códigos de falha)</div>
+        <div class="v-item"><div class="v-check" onclick="this.classList.toggle('done')"></div>Verificar número de série e código de rastreabilidade</div>
+        <div class="v-item"><div class="v-check" onclick="this.classList.toggle('done')"></div>Documentar deformações em chassi e suspensão</div>
+        <div class="v-item"><div class="v-check" onclick="this.classList.toggle('done')"></div>Confirmar histórico de manutenção no laudo</div>
+        <div class="v-item"><div class="v-check" onclick="this.classList.toggle('done')"></div>Verificar sinais de danos anteriores não declarados</div>
+        <div class="v-item"><div class="v-check" onclick="this.classList.toggle('done')"></div>Consultar tabela de valores para peças substituídas</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div style="background:#f8fafc;border-top:3px solid #E8530A;padding:32px 48px;display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+  <img src="https://gabrielsimidamore.github.io/Iscas-digitais-junior-pinheiro/junior-pinheiro.jpg" alt="Junior Pinheiro" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid #E8530A;flex-shrink:0" onerror="this.style.display='none'">
+  <div>
+    <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#E8530A;margin-bottom:4px">Sobre o autor</div>
+    <div style="font-size:17px;font-weight:700;color:#0f0f0f;margin-bottom:4px">Junior Pinheiro</div>
+    <div style="font-size:13px;color:#555;line-height:1.6;max-width:480px">Especialista em autopeças médio pesado com <strong>+20 anos</strong> ajudando frotas a reduzir custos. Passou por estoque, vendas, compras e hoje atua como gerente de projetos.</div>
+  </div>
+</div>
+<div class="footer">
+  <div class="footer-text">
+    <h3>Precisa de laudos técnicos e cotações?</h3>
+    <p>Nossa equipe especializada em peças médio pesado emite cotações formais para seguradoras com identificação de peça original ou remanufaturada.</p>
+  </div>
+  <button class="footer-btn">Solicitar cotação técnica</button>
+</div>
+
+
+<script>
+function buscar() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const cards = document.querySelectorAll('.term-card');
+  let visiveis = 0;
+  cards.forEach(card => {
+    const texto = card.textContent.toLowerCase();
+    const match = q === '' || texto.includes(q);
+    card.classList.toggle('hidden', !match);
+    if (match) visiveis++;
+  });
+  document.getElementById('count-num').textContent = visiveis;
+  document.getElementById('no-results').style.display = visiveis === 0 ? 'block' : 'none';
+
+  // Mostrar/esconder headers de categoria se todos os filhos estiverem ocultos
+  document.querySelectorAll('.cat-header').forEach(header => {
+    let nextEl = header.nextElementSibling;
+    let temVisivel = false;
+    while (nextEl && nextEl.classList.contains('term-grid')) {
+      if ([...nextEl.querySelectorAll('.term-card')].some(c => !c.classList.contains('hidden'))) {
+        temVisivel = true;
+      }
+      nextEl = nextEl.nextElementSibling;
+    }
+    header.style.display = temVisivel ? '' : 'none';
+  });
+}
+</script>
+<div style="text-align:center;padding:16px 24px;font-size:12px;opacity:0.5;font-family:sans-serif;border-top:1px solid rgba(128,128,128,0.15);margin-top:0">Desenvolvido por <strong>Junior Pinheiro</strong> · Especialista em Autopeças Médio Pesado</div>
+</body>
+</html>
